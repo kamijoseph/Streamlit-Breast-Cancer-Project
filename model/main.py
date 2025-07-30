@@ -5,6 +5,7 @@ import numpy as np
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, classification_report
 
 # Model function
 def build_model(data):
@@ -19,12 +20,23 @@ def build_model(data):
     X_train, X_test, y_train, y_test = train_test_split(
         X, y,
         test_size=0.2,
+        stratify=y,
         random_state=21
     )
 
     # training the logistic regression model
-    log_reg = LogisticRegression()
-    log_reg.fit(X_train, y_train)
+    model = LogisticRegression()
+    model.fit(X_train, y_train)
+
+    # testing the model
+    y_pred = model.predict(X_test)
+    accuracy = accuracy_score(y_test, y_pred)
+    clf_report = classification_report(y_test, y_pred)
+    print(f"The Accuracy Score is:\n {accuracy}")
+    print(f"\nClassification report:\n {clf_report}")
+
+    return model, scaler
+
 
 # data cleaning function
 def cleaned_data():
@@ -40,21 +52,11 @@ def cleaned_data():
     return data
 
 def main():
+    # fetching and cleaning the data
     data = cleaned_data()
-    print(data.head())
 
-
-
-
-
-
-
-
-
-
-
-
-
+    # scaling and building the model
+    model, scaler = build_model(data)
 
 
 if __name__ == "__main__":
