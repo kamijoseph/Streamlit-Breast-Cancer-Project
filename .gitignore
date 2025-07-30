@@ -1,5 +1,5 @@
 
-breast_cancer.csv
+dataset/
 .ipynb_checkpoints
 __pycache__/
 model/model.pkl
