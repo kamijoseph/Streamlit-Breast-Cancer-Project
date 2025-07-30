@@ -2,3 +2,5 @@
 breast_cancer.csv
 .ipynb_checkpoints
 __pycache__/
+model/model.pkl
+model/scaler.pkl

@@ -6,6 +6,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, classification_report
+import pickle
 
 # Model function
 def build_model(data):
@@ -37,7 +38,6 @@ def build_model(data):
 
     return model, scaler
 
-
 # data cleaning function
 def cleaned_data():
     #importing the dataset
@@ -57,6 +57,12 @@ def main():
 
     # scaling and building the model
     model, scaler = build_model(data)
+
+    # exporting the model
+    with open('model/model.pkl', 'wb') as f:
+        pickle.dump(model, f)
+    with open('model/scaler.pkl', 'wb') as f:
+        pickle.dump(scaler, f)
 
 
 if __name__ == "__main__":
