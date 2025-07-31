@@ -2,6 +2,7 @@
 import streamlit as st
 import pandas as pd
 import pickle
+import plotly.graph_objects as go
 
 #data cleaning function
 def cleaned_data():
@@ -81,6 +82,29 @@ def add_sidebar():
     # return the populated input dictionary
     return input_dict
 
+def build_radar_chart():
+    categories = []
+
+    fig = go.figure()
+
+    fig.add_trace(go.scatterpolar(
+        r=[1,2,3,4,5],
+        theta=categories,
+        fill='toself',
+        name=''
+    ))
+    fig.add_trace(go.scatterpolar(
+        r=[],
+        theta=categories,
+        fill='',
+        name=''
+    ))
+    fig.update_layout(
+        polar=dict(
+            radialaxis=dict()
+        )
+    )
+
 # main function
 def main():
 
@@ -105,7 +129,7 @@ def main():
 
     # columns application
     with col1:
-        st.write("Column 1")
+        build_radar_chart()
     with col2:
         st.write("Column 2")
 
