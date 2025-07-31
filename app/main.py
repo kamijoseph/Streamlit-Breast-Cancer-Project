@@ -82,28 +82,38 @@ def add_sidebar():
     # return the populated input dictionary
     return input_dict
 
-def build_radar_chart():
-    categories = []
+def build_radar_chart(input_data):
+    categories = [
+        'Radar', 'Texture', 'Perimeter', 'Area', 'Smoothness',
+        'Compactness', 'Concavity', 'Concave Points',
+        'Symmetry', 'Fractal Dimension'
+    ]
 
-    fig = go.figure()
+    fig = go.Figure()
 
-    fig.add_trace(go.scatterpolar(
-        r=[1,2,3,4,5],
+    fig.add_trace(go.Scatterpolar(
+        r=[1, 5, 2, 2, 3],
         theta=categories,
         fill='toself',
-        name=''
+        name='Product A'
     ))
-    fig.add_trace(go.scatterpolar(
-        r=[],
+    fig.add_trace(go.Scatterpolar(
+        r=[4, 3, 2.5, 1, 2],
         theta=categories,
-        fill='',
-        name=''
+        fill='toself',
+        name='Product B'
     ))
     fig.update_layout(
         polar=dict(
-            radialaxis=dict()
-        )
+            radialaxis=dict(
+                visible=True,
+                range=[0, 5]
+            )
+        ),
+        showlegend=False
     )
+    
+    return fig
 
 # main function
 def main():
@@ -129,7 +139,8 @@ def main():
 
     # columns application
     with col1:
-        build_radar_chart()
+        radar_chart = build_radar_chart(input_data)
+        st.plotly_chart(radar_chart)
     with col2:
         st.write("Column 2")
 
