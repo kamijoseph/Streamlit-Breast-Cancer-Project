@@ -92,16 +92,36 @@ def build_radar_chart(input_data):
     fig = go.Figure()
 
     fig.add_trace(go.Scatterpolar(
-        r=[1, 5, 2, 2, 3],
+        r=[
+            input_data['radius_mean'],
+            input_data['texture_mean'],
+            input_data['perimeter_mean'],
+            input_data['area_mean'],
+            input_data['compactness_mean'],
+            input_data['concavity_mean'],
+            input_data['concave points_mean'],
+            input_data['symmetry_mean'],
+            input_data['fractal_dimension_mean']
+        ],
         theta=categories,
         fill='toself',
-        name='Product A'
+        name='Mean Value'
     ))
     fig.add_trace(go.Scatterpolar(
-        r=[4, 3, 2.5, 1, 2],
+        r=[
+            input_data['radius_se'],
+            input_data['texture_se'],
+            input_data['perimeter_se'],
+            input_data['area_se'],
+            input_data['compactness_se'],
+            input_data['concavity_se'],
+            input_data['concave points_se'],
+            input_data['symmetry_se'],
+            input_data['fractal_dimension_se']
+        ],
         theta=categories,
         fill='toself',
-        name='Product B'
+        name='Standard Error'
     ))
     fig.update_layout(
         polar=dict(
