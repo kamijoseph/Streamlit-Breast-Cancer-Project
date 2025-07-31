@@ -159,6 +159,8 @@ def build_radar_chart(input_data):
         name='Worst Value'
     ))
     fig.update_layout(
+        width=800,
+        height=700,
         polar=dict(
             radialaxis=dict(
                 visible=True,
@@ -190,22 +192,27 @@ def predictions_column(input_data):
     prediction = model.predict(input_scaled)
 
     st.subheader("Cell Cluster Prediction")
+    st.divider()
     st.write("The cell cluster is:")
 
     # checking if prediction is malignant or benign
     if (prediction[0] == 1):
-        st.write("Malignant!!")
+        st.write("**MALIGNANT TUMOUR**")
     else:
-        st.write("Benign")
+        st.write("**BENIGN TUMOUR**")
 
     # probability for both classes
     benign_prob = model.predict_proba(input_scaled)[0][0]
     malignant_prob = model.predict_proba(input_scaled)[0][1]
 
+    st.divider()
+
     # write the probabilities to the interface
     st.write("Benign Probability:", benign_prob)
     st.write(f"Malignant Probability:", malignant_prob)
 
+    st.divider()
+    
     # Awareness
     st.write("This project can assist medical professional in making a diagnosis but is never a substitute for professional and proper medical diagnosis")
  
@@ -229,7 +236,7 @@ def main():
         st.write("The prediction model works by taking different inputs through the slider or by connecting your cytosis lab results. The model classifies breast lumps, mass or tumour into either Malignant or Benign with Malignant being cancerous tumour and the opposite for Benign")
     
     # columns initialization
-    col1, col2 = st.columns([4, 1])
+    col1, col2 = st.columns([4, 1], border=True )
 
     # columns application
     with col1:
