@@ -1,6 +1,7 @@
 
 import streamlit as st
 import pandas as pd
+import numpy as np
 import pickle
 import plotly.graph_objects as go
 
@@ -17,7 +18,7 @@ def cleaned_data():
 
     return data
 
-
+# sidebar function
 def add_sidebar():
 
     # creating the sidebar
@@ -82,7 +83,25 @@ def add_sidebar():
     # return the populated input dictionary
     return input_dict
 
+# scaler function to scale the input for the radar chart
+def scaled_values(input_dict):
+    data = cleaned_data()
+    X= data.drop(["diagnosis"], axis=1)
+    scaled_dict = {}
+
+    for key, value in input_dict.items():
+        max_val = X[key].max()
+        min_val = X[key].min()
+        scaled_value = (value - min_val) / (max_val - min_val)
+        scaled_dict[key] = scaled_value
+
+    return scaled_dict
+
+# radar chart function
 def build_radar_chart(input_data):
+
+    input_data = scaled_values(input_data)
+
     categories = [
         'Radar', 'Texture', 'Perimeter', 'Area', 'Smoothness',
         'Compactness', 'Concavity', 'Concave Points',
@@ -123,18 +142,73 @@ def build_radar_chart(input_data):
         fill='toself',
         name='Standard Error'
     ))
+    fig.add_trace(go.Scatterpolar(
+        r=[
+            input_data['radius_worst'],
+            input_data['texture_worst'],
+            input_data['perimeter_worst'],
+            input_data['area_worst'],
+            input_data['compactness_worst'],
+            input_data['concavity_worst'],
+            input_data['concave points_worst'],
+            input_data['symmetry_worst'],
+            input_data['fractal_dimension_worst']
+        ],
+        theta=categories,
+        fill='toself',
+        name='Worst Value'
+    ))
     fig.update_layout(
         polar=dict(
             radialaxis=dict(
                 visible=True,
-                range=[0, 5]
+                range=[0, 1]
             )
         ),
-        showlegend=False
+        showlegend=True
     )
     
     return fig
 
+# prediction column functiom
+def predictions_column(input_data):
+
+    #importing the model and scaler from our training
+    model = pickle.load(open("model/model.pkl", "rb"))
+    scaler = pickle.load(open("model/scaler.pkl", "rb"))
+
+    # converting input data to a numpy array
+    input_asarray = np.array(list(input_data.values()))
+
+    # reshaping the input array to 2d
+    input_reshaped = input_asarray.reshape(1, -1)
+
+    # scaling the input data using the imported scaler
+    input_scaled = scaler.transform(input_reshaped)
+
+    # Prediction using the imported model
+    prediction = model.predict(input_scaled)
+
+    st.subheader("Cell Cluster Prediction")
+    st.write("The cell cluster is:")
+
+    # checking if prediction is malignant or benign
+    if (prediction[0] == 1):
+        st.write("Malignant!!")
+    else:
+        st.write("Benign")
+
+    # probability for both classes
+    benign_prob = model.predict_proba(input_scaled)[0][0]
+    malignant_prob = model.predict_proba(input_scaled)[0][1]
+
+    # write the probabilities to the interface
+    st.write("Benign Probability:", benign_prob)
+    st.write(f"Malignant Probability:", malignant_prob)
+
+    # Awareness
+    st.write("This project can assist medical professional in making a diagnosis but is never a substitute for professional and proper medical diagnosis")
+ 
 # main function
 def main():
 
@@ -162,7 +236,7 @@ def main():
         radar_chart = build_radar_chart(input_data)
         st.plotly_chart(radar_chart)
     with col2:
-        st.write("Column 2")
+        predictions_column(input_data)
 
 # running the app
 if __name__ == "__main__":
