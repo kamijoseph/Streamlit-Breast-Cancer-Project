@@ -1,4 +1,5 @@
 
+# dependencies
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -214,7 +215,7 @@ def predictions_column(input_data):
     st.divider()
     
     # Awareness
-    st.write("This project can assist medical professional in making a diagnosis but is never a substitute for professional and proper medical diagnosis")
+    st.write("This project is to be used by medical professional in making a diagnosis but is never a substitute for professional and proper medical diagnosis")
  
 # main function
 def main():
