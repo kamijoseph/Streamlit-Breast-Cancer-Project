@@ -27,19 +27,33 @@ The application is based on the **Breast Cancer Wisconsin (Diagnostic) dataset**
 
 Streamlit-Breast-Cancer-Project/
 │
+
 ├── app/
+
 │ └── main.py # Streamlit UI application
+
 │
+
 ├── model/
+
 │ ├── main.py # Data cleaning, preprocessing, training
+
 │ └── model/
+
 │ ├── model.pkl # Trained Logistic Regression model
+
 │ └── scaler.pkl # Trained StandardScaler object
+
 │
+
 ├── dataset/
+
 │ └── breast_cancer.csv # UCI Breast Cancer dataset
+
 │
+
 ├── requirements.txt # List of required libraries
+
 └── README.md
 
 
