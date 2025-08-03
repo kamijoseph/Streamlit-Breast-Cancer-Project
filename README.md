@@ -1,6 +1,6 @@
 # 🧠 Streamlit Breast Cancer Prediction App
 
-🔗 **Live Demo**: [Click here to try the deployed app](https://your-app-url.streamlit.app)
+🔗 **Live Demo**: [Click here to try the deployed app]([https://your-app-url.streamlit.app](https://breast-cancer-prediction-f3wtpgbjzvpvohqysgbefx.streamlit.app/)
 
 
 ---
