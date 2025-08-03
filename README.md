@@ -1,6 +1,7 @@
 # 🧠 Streamlit Breast Cancer Prediction App
 
 🔗 **Live Demo**: [Click here to try the deployed app](https://breast-cancer-prediction-f3wtpgbjzvpvohqysgbefx.streamlit.app/)
+[![Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://breast-cancer-prediction-f3wtpgbjzvpvohqysgbefx.streamlit.app//)
 
 
 ---
