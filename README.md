@@ -79,22 +79,30 @@ Streamlit-Breast-Cancer-Project/
 
 ### 📦 Setup Guide
 
-```bash
 # 1. Clone this repository
+```bash
 git clone https://github.com/kamijoseph/Streamlit-Breast-Cancer-Project.git
 cd Streamlit-Breast-Cancer-Project
-
+```
 # 2. Create a new Conda environment
+```bash
 conda create -n cancer-predictor python=3.10
+```
+# 3. Activate environment
+```bash
 conda activate cancer-predictor
+```
 
-# 3. Install dependencies
+# 4. Install dependencies
+```bash
 conda install --file requirements.txt
+```
 
 # 4. Run the Streamlit application
+```bash
 cd app
 streamlit run main.py
-
+```
 
 ---
 
