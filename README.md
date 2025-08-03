@@ -112,5 +112,4 @@ Feel free to [open an issue](https://github.com/kamijoseph/Streamlit-Breast-Canc
 ---
 
 ### Built by [@kamijoseph](https://github.com/kamijoseph) using [Streamlit](https://streamlit.io/)
----
 [![Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://breast-cancer-prediction-f3wtpgbjzvpvohqysgbefx.streamlit.app//)
