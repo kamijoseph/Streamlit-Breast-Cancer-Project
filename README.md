@@ -97,7 +97,7 @@ conda activate cancer-predictor
 conda install --file requirements.txt
 ```
 
-### 4. Run the Streamlit application
+### 5. Run the Streamlit application
 ```bash
 cd app
 streamlit run main.py
